@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-3G-IHF">
-                                <rect key="frame" x="0.0" y="234" width="393" height="584"/>
+                                <rect key="frame" x="0.0" y="219" width="393" height="544.66666666666663"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7xY-Ns-IWp">
@@ -36,23 +36,38 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pz3-k7-90H">
+                                <rect key="frame" x="131.66666666666666" y="783.66666666666663" width="129.99999999999997" height="34.333333333333371"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="Fof-3g-2ea"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Save">
+                                    <color key="baseBackgroundColor" red="0.41246587039999999" green="0.2639094293" blue="0.49806076290000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6hm-db-bNE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="a1t-3G-IHF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5MD-nq-FsF"/>
-                            <constraint firstItem="a1t-3G-IHF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="MF1-Ia-JKb"/>
+                            <constraint firstItem="pz3-k7-90H" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="7qQ-mf-9md"/>
+                            <constraint firstItem="pz3-k7-90H" firstAttribute="top" secondItem="a1t-3G-IHF" secondAttribute="bottom" constant="20" id="FBY-pR-ftl"/>
+                            <constraint firstItem="pz3-k7-90H" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Kfe-GS-5Yb"/>
                             <constraint firstItem="7xY-Ns-IWp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="YJI-ff-DJf"/>
                             <constraint firstItem="7xY-Ns-IWp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YMn-aL-OBG"/>
                             <constraint firstItem="a1t-3G-IHF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="h8s-M4-6EB"/>
-                            <constraint firstItem="a1t-3G-IHF" firstAttribute="top" secondItem="7xY-Ns-IWp" secondAttribute="bottom" constant="40" id="vm3-hG-D2h"/>
+                            <constraint firstItem="a1t-3G-IHF" firstAttribute="top" secondItem="7xY-Ns-IWp" secondAttribute="bottom" constant="25" id="vm3-hG-D2h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7xY-Ns-IWp" secondAttribute="trailing" constant="16" id="xtb-Zm-erf"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="a1t-3G-IHF" id="pGM-0M-etD"/>
-                        <outlet property="nameText" destination="XcF-iE-DsY" id="FX0-tn-Rew"/>
                         <outlet property="noteText" destination="iOj-gN-nfm" id="LbF-ZC-sGP"/>
+                        <outlet property="titleText" destination="XcF-iE-DsY" id="nPj-8N-IMv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

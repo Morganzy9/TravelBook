@@ -8,12 +8,14 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class ViewController: UIViewController {
     
-
     
-    @IBOutlet var nameText: UITextField!
+    
+    @IBOutlet var titleText: UITextField!
+    
     
     @IBOutlet var noteText: UITextField!
     
@@ -21,11 +23,18 @@ class ViewController: UIViewController {
     
     var locationManager = CLLocationManager()
     
+    var choosenLatitude = Double()
+    
+    var choosenLongitude = Double()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gestureForKeyboardHidding = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(gestureForKeyboardHidding)
+        
         
         mapDelegate()
         managerLocation()
@@ -35,6 +44,42 @@ class ViewController: UIViewController {
         gestureRecognizer.minimumPressDuration = 2
         
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        
+        
+    }
+    
+    
+    @IBAction func saveButton(_ sender: Any) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let newPlace = NSEntityDescription.insertNewObject(forEntityName: "Places", into: context)
+        
+        
+        
+        newPlace.setValue(titleText.text, forKey: "title")
+        newPlace.setValue(noteText.text, forKey: "note")
+        
+        newPlace.setValue(choosenLatitude, forKey: "latitude")
+        newPlace.setValue(choosenLongitude, forKey: "longitude")
+        newPlace.setValue(UUID(), forKey: "id")
+        
+        
+        
+        do {
+            
+            try context.save()
+            
+            print("Saved")
+            
+        }catch {
+            print("Error")
+        }
+        
+        
+        
         
     }
     
@@ -47,12 +92,17 @@ class ViewController: UIViewController {
             
             let touchedCoordinate = mapView.convert(touchedPoint, toCoordinateFrom: mapView)
             
-//           PIN :
+            choosenLatitude = touchedCoordinate.latitude
+            
+            choosenLongitude = touchedCoordinate.longitude
+            
+            
+            //           PIN  ON MAP:
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = touchedCoordinate
             
-            annotation.title = nameText.text
+            annotation.title = titleText.text
             annotation.subtitle = noteText.text
             
             
@@ -64,8 +114,11 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
     
-
+    
 }
 
 
@@ -98,19 +151,19 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     
-/*
-        locationManager function search the location of user and shows it on map
- 
- 
- */
-
+    /*
+     locationManager function search the location of user and shows it on map
+     
+     
+     */
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
         
-//        How much do i want to zoom in , in map
-//        How much the number smaller then zoom is out bigger
+        //        How much do i want to zoom in , in map
+        //        How much the number smaller then zoom is out bigger
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         
         let region = MKCoordinateRegion(center: location, span: span)
