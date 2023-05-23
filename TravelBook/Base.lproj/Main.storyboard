@@ -17,17 +17,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-3G-IHF">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-3G-IHF">
+                                <rect key="frame" x="0.0" y="234" width="393" height="584"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7xY-Ns-IWp">
+                                <rect key="frame" x="16" y="94" width="361" height="100"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcF-iE-DsY">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOj-gN-nfm">
+                                        <rect key="frame" x="0.0" y="66" width="361" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="a1t-3G-IHF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5MD-nq-FsF"/>
+                            <constraint firstItem="a1t-3G-IHF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="MF1-Ia-JKb"/>
+                            <constraint firstItem="7xY-Ns-IWp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="YJI-ff-DJf"/>
+                            <constraint firstItem="7xY-Ns-IWp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YMn-aL-OBG"/>
+                            <constraint firstItem="a1t-3G-IHF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="h8s-M4-6EB"/>
+                            <constraint firstItem="a1t-3G-IHF" firstAttribute="top" secondItem="7xY-Ns-IWp" secondAttribute="bottom" constant="40" id="vm3-hG-D2h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7xY-Ns-IWp" secondAttribute="trailing" constant="16" id="xtb-Zm-erf"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="a1t-3G-IHF" id="pGM-0M-etD"/>
+                        <outlet property="nameText" destination="XcF-iE-DsY" id="FX0-tn-Rew"/>
+                        <outlet property="noteText" destination="iOj-gN-nfm" id="LbF-ZC-sGP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
