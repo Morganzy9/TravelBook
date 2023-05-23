@@ -17,16 +17,46 @@ class ViewController: UIViewController {
     var locationManager = CLLocationManager()
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapDelegate()
         managerLocation()
         
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(chooseLocation(gestureRecognizer: )))
+        
+        gestureRecognizer.minimumPressDuration = 2
+        
+        mapView.addGestureRecognizer(gestureRecognizer)
         
     }
     
     
+    @objc func chooseLocation(gestureRecognizer: UILongPressGestureRecognizer) {
+        
+        if gestureRecognizer.state == .began {
+            
+            let touchedPoint = gestureRecognizer.location(in: mapView)
+            
+            let touchedCoordinate = mapView.convert(touchedPoint, toCoordinateFrom: mapView)
+            
+//           PIN :
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = touchedCoordinate
+            
+            annotation.title = "New Annotation"
+            
+            annotation.subtitle = "Travel Book"
+            
+            mapView.addAnnotation(annotation)
+            
+            
+        }
+        
+    }
     
     
 
@@ -40,6 +70,7 @@ extension ViewController : MKMapViewDelegate {
     func mapDelegate() {
         mapView.delegate = self
     }
+    
     
     
     
