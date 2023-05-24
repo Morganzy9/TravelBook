@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jhz-Ke-H4G">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -9,27 +9,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--TableVC-->
         <scene sceneID="UOV-Wa-eic">
             <objects>
-                <viewController id="V9t-dD-d6l" sceneMemberID="viewController">
+                <viewController id="V9t-dD-d6l" customClass="TableVC" customModule="TravelBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8FC-KZ-6hV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="trP-hJ-nk1">
-                                <rect key="frame" x="64" y="206" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="trP-hJ-nk1">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ae2-VP-U7b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ae2-VP-U7b" firstAttribute="trailing" secondItem="trP-hJ-nk1" secondAttribute="trailing" id="DC7-1R-K5T"/>
+                            <constraint firstItem="ae2-VP-U7b" firstAttribute="bottom" secondItem="trP-hJ-nk1" secondAttribute="bottom" id="Fxa-k2-A7U"/>
+                            <constraint firstItem="trP-hJ-nk1" firstAttribute="top" secondItem="ae2-VP-U7b" secondAttribute="top" id="ida-jh-fUM"/>
+                            <constraint firstItem="trP-hJ-nk1" firstAttribute="leading" secondItem="ae2-VP-U7b" secondAttribute="leading" id="tJe-iq-PMF"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="fof-CK-JbR"/>
+                    <connections>
+                        <outlet property="tableView" destination="trP-hJ-nk1" id="3up-8p-4bU"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toDetailMapVC" id="zBt-Z2-a3i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tvV-vv-PaD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-753" y="0.0"/>
+            <point key="canvasLocation" x="173.2824427480916" y="0.0"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -40,11 +50,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1t-3G-IHF">
-                                <rect key="frame" x="0.0" y="219" width="393" height="544.66666666666663"/>
+                                <rect key="frame" x="0.0" y="263" width="393" height="500.66666666666674"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7xY-Ns-IWp">
-                                <rect key="frame" x="16" y="94" width="361" height="100"/>
+                                <rect key="frame" x="16" y="138" width="361" height="100"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XcF-iE-DsY">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
@@ -86,6 +96,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7xY-Ns-IWp" secondAttribute="trailing" constant="16" id="xtb-Zm-erf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="AZL-Md-UUD"/>
                     <connections>
                         <outlet property="mapView" destination="a1t-3G-IHF" id="pGM-0M-etD"/>
                         <outlet property="noteText" destination="iOj-gN-nfm" id="LbF-ZC-sGP"/>
@@ -94,7 +105,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="1060" y="0.0"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UxX-yV-pTn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jhz-Ke-H4G" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e9z-l4-bTH">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="V9t-dD-d6l" kind="relationship" relationship="rootViewController" id="hwl-qi-AWT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAn-di-drT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-753.43511450381675" y="0.0"/>
         </scene>
     </scenes>
     <resources>

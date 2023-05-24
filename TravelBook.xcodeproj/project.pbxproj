@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		164C0C4A2A1CC8EC008E60DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 164C0C492A1CC8EC008E60DE /* Main.storyboard */; };
+		16B26BCE2A1E422C00254C98 /* TableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B26BCD2A1E422C00254C98 /* TableVC.swift */; };
 		16E5C60F2A1B260000A025E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5C60E2A1B260000A025E5 /* AppDelegate.swift */; };
 		16E5C6112A1B260000A025E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5C6102A1B260000A025E5 /* SceneDelegate.swift */; };
 		16E5C6132A1B260000A025E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E5C6122A1B260000A025E5 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		164C0C492A1CC8EC008E60DE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		16B26BCD2A1E422C00254C98 /* TableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVC.swift; sourceTree = "<group>"; };
 		16E5C60B2A1B260000A025E5 /* TravelBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16E5C60E2A1B260000A025E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16E5C6102A1B260000A025E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				16E5C60E2A1B260000A025E5 /* AppDelegate.swift */,
 				16E5C6102A1B260000A025E5 /* SceneDelegate.swift */,
 				16E5C6122A1B260000A025E5 /* ViewController.swift */,
+				16B26BCD2A1E422C00254C98 /* TableVC.swift */,
 				164C0C492A1CC8EC008E60DE /* Main.storyboard */,
 				16E5C61A2A1B260100A025E5 /* Assets.xcassets */,
 				16E5C61C2A1B260100A025E5 /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				16E5C6192A1B260000A025E5 /* TravelBook.xcdatamodeld in Sources */,
 				16E5C6132A1B260000A025E5 /* ViewController.swift in Sources */,
 				16E5C60F2A1B260000A025E5 /* AppDelegate.swift in Sources */,
+				16B26BCE2A1E422C00254C98 /* TableVC.swift in Sources */,
 				16E5C6112A1B260000A025E5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
