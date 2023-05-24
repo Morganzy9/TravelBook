@@ -14,7 +14,7 @@ class TableVC: UIViewController {
     
     var idArray = [UUID]()
     var titlesArray = [String]()
-    
+    var noteArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,7 @@ class TableVC: UIViewController {
         
         idArray.removeAll()
         titlesArray.removeAll()
+        noteArray.removeAll()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -78,6 +79,10 @@ class TableVC: UIViewController {
                     
                     if let id = result.value(forKey: "id") as? UUID {
                         idArray.append(id)
+                    }
+                    
+                    if let note = result.value(forKey: "note") as? String {
+                        noteArray.append(note)
                     }
                     
                 }
@@ -118,7 +123,10 @@ extension TableVC : UITableViewDataSource {
         let cell = UITableViewCell()
         
         var content = cell.defaultContentConfiguration()
+        
         content.text = titlesArray[indexPath.row]
+        
+        content.secondaryText = noteArray[indexPath.row]
         
         cell.contentConfiguration = content
         
