@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var titleText: UITextField!
     
-    
     @IBOutlet var noteText: UITextField!
     
     @IBOutlet var mapView: MKMapView!
@@ -39,6 +38,7 @@ class ViewController: UIViewController {
         mapDelegate()
         managerLocation()
         
+        
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(chooseLocation(gestureRecognizer: )))
         
         gestureRecognizer.minimumPressDuration = 2
@@ -58,25 +58,31 @@ class ViewController: UIViewController {
         let newPlace = NSEntityDescription.insertNewObject(forEntityName: "Places", into: context)
         
         
-        
-        newPlace.setValue(titleText.text, forKey: "title")
-        newPlace.setValue(noteText.text, forKey: "note")
-        
-        newPlace.setValue(choosenLatitude, forKey: "latitude")
-        newPlace.setValue(choosenLongitude, forKey: "longitude")
-        newPlace.setValue(UUID(), forKey: "id")
-        
-        
-        
-        do {
+            newPlace.setValue(titleText.text, forKey: "title")
+            newPlace.setValue(noteText.text, forKey: "note")
             
-            try context.save()
+            newPlace.setValue(choosenLatitude, forKey: "latitude")
+            newPlace.setValue(choosenLongitude, forKey: "longitude")
+            newPlace.setValue(UUID(), forKey: "id")
             
-            print("Saved")
             
-        }catch {
-            print("Error")
+        if titleText.text != "" && noteText.text != "" {
+            
+            do {
+                
+                try context.save()
+                
+                print("Saved")
+                
+            } catch {
+                print("Error")
+            }
+            
         }
+            
+        
+        
+       
         
         
         
@@ -153,7 +159,6 @@ extension ViewController : CLLocationManagerDelegate {
     
     /*
      locationManager function search the location of user and shows it on map
-     
      
      */
     
