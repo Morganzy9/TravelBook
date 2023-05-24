@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let gestureForKeyboardHidding = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        
         view.addGestureRecognizer(gestureForKeyboardHidding)
         
         
@@ -44,8 +45,6 @@ class ViewController: UIViewController {
         gestureRecognizer.minimumPressDuration = 2
         
         mapView.addGestureRecognizer(gestureRecognizer)
-        
-        
         
     }
     
@@ -81,8 +80,9 @@ class ViewController: UIViewController {
         }
             
         
+        NotificationCenter.default.post(name: NSNotification.Name("newData"), object: nil)
         
-       
+        navigationController?.popViewController(animated: true)
         
         
         
@@ -159,6 +159,7 @@ extension ViewController : CLLocationManagerDelegate {
     
     /*
      locationManager function search the location of user and shows it on map
+     Center it in map
      
      */
     
