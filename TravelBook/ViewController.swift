@@ -27,6 +27,21 @@ class ViewController: UIViewController {
     var choosenLongitude = Double()
     
     
+    var selectedTitle = ""
+    
+    var selectedNote = ""
+    
+    var selectedTitleId : UUID?
+    
+    
+    
+    
+    var annotationTitle = ""
+    var annotationNote = ""
+    var annotationLatitude = Double()
+    var annotationLongitude = Double()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +52,7 @@ class ViewController: UIViewController {
         
         
         mapDelegate()
-        managerLocation()
+        setUpLocation()
         
         
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(chooseLocation(gestureRecognizer: )))
@@ -45,6 +60,8 @@ class ViewController: UIViewController {
         gestureRecognizer.minimumPressDuration = 2
         
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        showInDetail()
         
     }
     
@@ -88,6 +105,92 @@ class ViewController: UIViewController {
         
         
     }
+    
+    func showInDetail() {
+        
+        if selectedTitle != "" {
+//            Get info from CoreData
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            let context = appDelegate.persistentContainer.viewContext
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Places")
+            
+            let idString = selectedTitleId!.uuidString
+           
+            fetchRequest.predicate = NSPredicate(format: "id = %@", idString)
+            
+            fetchRequest.returnsObjectsAsFaults = false
+            
+           
+            do {
+                
+                let results = try context.fetch(fetchRequest)
+                
+                if results.count > 0 {
+                    
+                    for result in results as! [NSManagedObject] {
+                        
+                        if let title = result.value(forKey: "title") as? String {
+                            
+                            annotationTitle = title
+                            
+                            if let note = result.value(forKey: "note") as? String {
+                                
+                                annotationNote = note
+                                
+                                if let latitude = result.value(forKey: "latitude") as? Double {
+                                    
+                                    annotationLatitude = latitude
+                                    
+                                    if let longitude = result.value(forKey: "longitude") as? Double {
+                                        
+                                        annotationLongitude = longitude
+                                        
+                                        let annotaion = MKPointAnnotation()
+                                        
+                                        annotaion.title = annotationTitle
+                                        annotaion.subtitle = annotationNote
+                                        
+                                        let location = CLLocationCoordinate2D(latitude: annotationLatitude, longitude: annotationLongitude)
+                                        
+                                        annotaion.coordinate = location
+                                        
+                                        mapView.addAnnotation(annotaion)
+                                        
+                                        titleText.text = annotationTitle
+                                        noteText.text = annotationNote
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                
+            } catch {
+                
+                print("Error")
+                
+            }
+            
+
+            
+        }else {
+//            Adding new Data
+            
+        }
+        
+        
+    }
+    
     
     
     @objc func chooseLocation(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -144,7 +247,7 @@ extension ViewController : MKMapViewDelegate {
 extension ViewController : CLLocationManagerDelegate {
     
     
-    func managerLocation() {
+    func setUpLocation() {
         
         locationManager.delegate = self
         
@@ -170,7 +273,8 @@ extension ViewController : CLLocationManagerDelegate {
         
         //        How much do i want to zoom in , in map
         //        How much the number smaller then zoom is out bigger
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         
         let region = MKCoordinateRegion(center: location, span: span)
         

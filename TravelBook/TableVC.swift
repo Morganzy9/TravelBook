@@ -13,8 +13,13 @@ class TableVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var idArray = [UUID]()
+    
     var titlesArray = [String]()
+    
     var noteArray = [String]()
+    
+    var choosenTitle = ""
+    var choosenTitleId : UUID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +35,6 @@ class TableVC: UIViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonClicked))
         
         
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +46,8 @@ class TableVC: UIViewController {
     
     @objc func addButtonClicked() {
         
+        choosenTitle = ""
+        
         performSegue(withIdentifier: "toDetailMapVC", sender: nil)
         
     }
@@ -51,9 +55,7 @@ class TableVC: UIViewController {
     
     @objc func getData() {
         
-        idArray.removeAll()
-        titlesArray.removeAll()
-        noteArray.removeAll()
+        
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -71,8 +73,12 @@ class TableVC: UIViewController {
             
             if results.count > 0 {
                 
+                idArray.removeAll(keepingCapacity: false)
+                titlesArray.removeAll(keepingCapacity: false)
+                noteArray.removeAll(keepingCapacity: false)
+                
                 for result in results as! [NSManagedObject] {
-                        
+                         
                     if let title = result.value(forKey: "title") as? String {
                         titlesArray.append(title)
                     }
@@ -85,6 +91,8 @@ class TableVC: UIViewController {
                         noteArray.append(note)
                     }
                     
+                    tableView.reloadData()
+                    
                 }
                 
             }
@@ -96,7 +104,7 @@ class TableVC: UIViewController {
             
         }
         
-        tableView.reloadData()
+        
         
     }
     
@@ -133,6 +141,33 @@ extension TableVC : UITableViewDataSource {
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        choosenTitle = titlesArray[indexPath.row]
+        choosenTitleId = idArray[indexPath.row]
+        
+        performSegue(withIdentifier: "toDetailMapVC", sender: nil)
+        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toDetailMapVC" {
+            
+            let destination = segue.destination as? ViewController
+            
+            destination?.selectedTitle = choosenTitle
+            destination?.selectedTitleId = choosenTitleId
+            
+        }
+        
+    }
+    
+    
+    
+    
     
 }
 
