@@ -233,7 +233,6 @@ class ViewController: UIViewController {
             
             mapView.addAnnotation(annotation)
             
-            
         }
         
     }
@@ -300,6 +299,45 @@ extension ViewController : CLLocationManagerDelegate {
             
         }
         
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        let reuseId = "myPin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+        
+        if pinView == nil {
+            
+            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+             
+            pinView?.canShowCallout = true
+            
+            pinView?.tintColor = UIColor.systemIndigo
+            
+            
+            var button: UIButton = {
+                
+                let button = UIButton(type: .detailDisclosure)
+                
+                return button
+            }()
+            
+            pinView?.rightCalloutAccessoryView = button
+            
+            
+            
+        } else {
+            
+            pinView?.annotation = annotation
+            
+        }
+        
+        
+        return pinView
     }
     
 }
