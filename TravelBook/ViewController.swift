@@ -162,6 +162,21 @@ class ViewController: UIViewController {
                                         titleText.text = annotationTitle
                                         noteText.text = annotationNote
                                         
+//                                        MARK: when user taps to see in detail it will center not user location it center the annotation of saved place
+                                        
+                                        locationManager.stopUpdatingLocation()
+                                        
+//                                        Zoom
+                                        
+                                        let span =  MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                        
+//                                        Centering
+                                        
+                                        let region = MKCoordinateRegion(center: location, span: span)
+                                        
+                                        mapView.setRegion(region, animated: true)
+                                        
+                                        
                                     }
                                     
                                 }
@@ -269,17 +284,21 @@ extension ViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-        
-        //        How much do i want to zoom in , in map
-        //        How much the number smaller then zoom is out bigger
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        
-        let region = MKCoordinateRegion(center: location, span: span)
-        
-        
-        mapView.setRegion(region, animated: true)
+        if selectedTitle == "" {
+            
+            let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+            
+            //        How much do i want to zoom in , in map
+            //        How much the number smaller then zoom is out bigger
+            
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            
+            let region = MKCoordinateRegion(center: location, span: span)
+            
+            
+            mapView.setRegion(region, animated: true)
+            
+        }
         
     }
     
