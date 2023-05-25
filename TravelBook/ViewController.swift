@@ -302,6 +302,8 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     
+//    MARK: Custom pin on map
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         guard !(annotation is MKUserLocation) else { return nil }
@@ -319,7 +321,7 @@ extension ViewController : CLLocationManagerDelegate {
             pinView?.tintColor = UIColor.systemIndigo
             
             
-            var button: UIButton = {
+            let button: UIButton = {
                 
                 let button = UIButton(type: .detailDisclosure)
                 
@@ -339,6 +341,39 @@ extension ViewController : CLLocationManagerDelegate {
         
         return pinView
     }
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if selectedTitle != "" {
+            
+            let requestLocation = CLLocation(latitude: annotationLatitude, longitude: annotationLongitude)
+            
+            CLGeocoder().reverseGeocodeLocation(requestLocation) { (placemarks, error) in
+                
+                guard let placemark = placemarks else { return }
+                
+                if placemark.count > 0 {
+                   
+                    let newPlacesMark = MKPlacemark(placemark: placemark[0])
+                    
+                    let item = MKMapItem(placemark: newPlacesMark)
+                    
+                    item.name = self.annotationTitle
+                    
+                    let lauchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+                    
+                    item.openInMaps(launchOptions: lauchOptions)
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+    }
+    
     
 }
 
